@@ -13,13 +13,13 @@ namespace book_appointment.Repository
             _myDbContext = myDbContext;
         }
 
-        public void AddNewCustomer(UserData userData)
+        public UserData AddNewCustomer(UserData userData)
         {
             try
             {
                 _myDbContext.UserData.Add(userData);
-                _myDbContext.SaveChangesAsync();
-
+                _myDbContext.SaveChanges();
+                return userData;
             }
             catch (Exception e)
             {

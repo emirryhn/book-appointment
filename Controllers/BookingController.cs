@@ -25,12 +25,12 @@ namespace book_appointment.Controllers
 
         //AGENCY ADD NEW APPOINTMENT
         [HttpPost]
-        [ProducesResponseType(typeof(IEnumerable<UserData>), 200)]
+        [ProducesResponseType(typeof(IEnumerable<BookAppointment>), 200)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<BookAppointment>> AddNewAppointment(BookAppointment bookAppointment)
         {
-            _iBookAppointment.AddNewAppointment(bookAppointment);
-            return Ok("Your waiting number is " + bookAppointment.WaitingNumber);
+            var result = _iBookAppointment.AddNewAppointment(bookAppointment);
+            return Ok(result);
         }
 
         // //AGENCY ADD NEW USER
@@ -40,8 +40,8 @@ namespace book_appointment.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> AddNewUser(UserData userData)
         {
-            _iCustomer.AddNewCustomer(userData);
-            return Ok("User " + userData.Name + " Added");
+            var result = _iCustomer.AddNewCustomer(userData);
+            return Ok("User " + result.Name + " Added");
         }
 
 

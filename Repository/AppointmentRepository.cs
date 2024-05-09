@@ -13,7 +13,7 @@ namespace book_appointment.Repository
             _myDbContext = myDbContext;
         }
 
-        public void AddNewAppointment(BookAppointment bookAppointment)
+        public BookAppointment AddNewAppointment(BookAppointment bookAppointment)
         {
             try
             {
@@ -33,6 +33,7 @@ namespace book_appointment.Repository
                     bookAppointment.WaitingNumber = nextValue;
                     _myDbContext.BookAppointment.Add(bookAppointment);
                     _myDbContext.SaveChanges();
+                    return bookAppointment;
                 }
             }
             catch

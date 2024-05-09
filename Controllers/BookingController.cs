@@ -22,9 +22,11 @@ namespace book_appointment.Controllers
             _iBookAppointment = iBookingAppointment;
             _iCustomer = iCustomer;
         }
-        
+
         //AGENCY ADD NEW APPOINTMENT
         [HttpPost]
+        [ProducesResponseType(typeof(IEnumerable<UserData>), 200)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<BookAppointment>> AddNewAppointment(BookAppointment bookAppointment)
         {
             _iBookAppointment.AddNewAppointment(bookAppointment);
@@ -34,6 +36,8 @@ namespace book_appointment.Controllers
         // //AGENCY ADD NEW USER
         [HttpPost]
         [Route("new-user")]
+        [ProducesResponseType(typeof(IEnumerable<UserData>), 200)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> AddNewUser(UserData userData)
         {
             _iCustomer.AddNewCustomer(userData);
@@ -44,6 +48,8 @@ namespace book_appointment.Controllers
         // //AGENCY LIST APPOINTMENTS BY DATE
         [HttpGet]
         [Route("date")]
+        [ProducesResponseType(typeof(IEnumerable<BookAppointment>), 200)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetApointmentsByDate(DateTime date)
         {
             var getAppointment = await Task.FromResult(_iBookAppointment.GetAppointmentByDate(date));

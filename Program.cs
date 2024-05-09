@@ -26,7 +26,10 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(a =>
+    {
+        a.SwaggerEndpoint("/swagger/v1/swagger.json", "Booking appointment V1");
+    });
 }
 
 app.UseHttpsRedirection();

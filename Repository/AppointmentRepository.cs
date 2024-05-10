@@ -49,7 +49,7 @@ namespace book_appointment.Repository
                 var result = _myDbContext.BookAppointment.Where(a => a.DateTimeAppointment.Date == date.Date).ToList();
                 if (result.Count == 0)
                 {
-                    throw new FileNotFoundException("Customer not found, please add or use another user!");
+                    throw new("No Appointment on "+date+" !");
                 }
                 return result;
             }

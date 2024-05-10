@@ -6,6 +6,7 @@ dotnet ef database update
 
 API INSTRUCTION:
 1. /Booking
+   NO NEED TO INPUT EDIT waiitngNumber, dateAppointment & createdTime
 2. /Booking/new-user
 3. /Booking/date
    TESTING FORMAT : (yyyy-MM-dd) ex: 2024-05-08

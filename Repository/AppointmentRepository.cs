@@ -2,6 +2,7 @@ using book_appointment.Interface;
 using book_appointment.Models;
 using book_appointment.Services;
 using Microsoft.IdentityModel.Tokens;
+using Nager.Date;
 
 namespace book_appointment.Repository
 {
@@ -23,11 +24,15 @@ namespace book_appointment.Repository
                                     select db.Name);
                 if (customerName.IsNullOrEmpty())
                 {
-                    throw new ("Customer not found, please add or use another user!");
+                    throw new("Customer not found, please add or use another user!");
                 }
                 else
                 {
                     //GET LAST WAITING NUMBER
+                    if (WeekendSystem.IsWeekend(bookAppointment.DateTimeAppointment, CountryCode.ID))
+                    {
+                        throw new("Is weekend, select another date");
+                    }
                     var lastValue = _myDbContext.BookAppointment.OrderByDescending(a => a.WaitingNumber).Select(e => e.WaitingNumber).FirstOrDefault();
                     int nextValue = lastValue + 1;
                     bookAppointment.WaitingNumber = nextValue;
@@ -49,7 +54,7 @@ namespace book_appointment.Repository
                 var result = _myDbContext.BookAppointment.Where(a => a.DateTimeAppointment.Date == date.Date).ToList();
                 if (result.Count == 0)
                 {
-                    throw new("No Appointment on "+date+" !");
+                    throw new("No Appointment on " + date + " !");
                 }
                 return result;
             }
